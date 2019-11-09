@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.summary  = 'A view controller that prompts users to enter a passcode.'
   s.homepage = 'https://github.com/TimOliver/TOPasscodeViewController'
   s.author   = 'Tim Oliver'
-  s.source   = { :git => 'https://github.com/TimOliver/TOPasscodeViewController.git', :tag => s.version }
+  s.source   = { :git => 'https://github.com/MonkeySolution/TOPasscodeViewController.git', :tag => s.version }
   s.platform = :ios, '8.3'
 
   s.source_files = 'TOPasscodeViewController/**/*.{h,m}'

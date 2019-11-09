@@ -94,11 +94,10 @@
 - (void)setTextForCount:(NSInteger)count
 {
     NSString *text = nil;
-    if (count == 1) {
-        text = NSLocalizedString(@"1 Failed Passcode Attempt", @"");
-    }
-    else {
+    if(self.setPassCodePage_FailedPassCodeAttempts == NULL){
         text = [NSString stringWithFormat:NSLocalizedString(@"%d Failed Passcode Attempts", @""), count];
+    } else {
+        text = [NSString stringWithFormat: self.setPassCodePage_FailedPassCodeAttempts, count];
     }
     self.label.text = text;
 

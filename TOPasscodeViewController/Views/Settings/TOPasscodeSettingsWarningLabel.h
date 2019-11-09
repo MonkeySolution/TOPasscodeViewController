@@ -40,4 +40,6 @@
 /** Set the padding around the label */
 @property (nonatomic, assign) CGSize textPadding;
 
+@property (nonatomic, strong) NSString *setPassCodePage_FailedPassCodeAttempts;
+
 @end

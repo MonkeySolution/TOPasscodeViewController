@@ -54,6 +54,7 @@
     PresentationStrings presentationString;
     presentationString.passCodeEnterViewTitle = @"Enter PASS";
     presentationString.letteredTitles = @[@"ABC", @"DEF", @"GHI", @"JKL", @"MNO", @"PQRS", @"TUV", @"WXYZ"];
+    presentationString.setPassCodePage_FailedPassCodeAttempts = NSLocalizedString(@"%d Failed Passcode Attempts !!!", @"");
     TOPasscodeViewController *passcodeViewController = [[TOPasscodeViewController alloc] initWithStyle:self.style passcodeType:TOPasscodeTypeFourDigits presentationString: presentationString];
     passcodeViewController.delegate = self;
     passcodeViewController.allowCancel = false;
@@ -75,6 +76,7 @@
     presentationString.setPassCodePage_EnterCurrentPasscode = @"Enter current passcode";
     presentationString.setPassCodePage_EnterNewPasscode = @"Enter new passcode";
     presentationString.setPassCodePage_ConfirmNewPasscode = @"Confirm new passcode";
+    presentationString.setPassCodePage_FailedPassCodeAttempts = NSLocalizedString(@"%d Failed Passcode Attempts !!!", @"");
     TOPasscodeSettingsViewController *settingsController = [[TOPasscodeSettingsViewController alloc] initWithPresentationString: presentationString];
     
     settingsController.passcodeType = TOPasscodeTypeFourDigits;

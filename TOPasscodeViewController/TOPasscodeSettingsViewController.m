@@ -64,6 +64,9 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
 {
     if (self = [self initWithNibName:nil bundle:nil]) {
         _presentationString = presentationString;
+        if(_presentationString.setPassCodePage_PasscodeOptionsButton == NULL){
+            _presentationString.setPassCodePage_PasscodeOptionsButton = NSLocalizedString(@"Passcode Options", @"");
+        }
         [self setUp];
     }
 
@@ -133,6 +136,7 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
 
     // Create warning label view
     self.warningLabel = [[TOPasscodeSettingsWarningLabel alloc] initWithFrame:CGRectZero];
+    self.warningLabel.setPassCodePage_FailedPassCodeAttempts = _presentationString.setPassCodePage_FailedPassCodeAttempts;
     self.warningLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     self.warningLabel.hidden = YES;
     [self.warningLabel sizeToFit];
@@ -153,7 +157,7 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
     // Create Options button
   
     self.optionsButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [self.optionsButton setTitle:NSLocalizedString(@"Passcode Options", @"") forState:UIControlStateNormal];
+    [self.optionsButton setTitle:self.presentationString.setPassCodePage_PasscodeOptionsButton forState:UIControlStateNormal];
     self.optionsButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
     [self.optionsButton sizeToFit];
     [self.optionsButton addTarget:self action:@selector(optionsCodeButtonTapped:) forControlEvents:UIControlEventTouchUpInside];

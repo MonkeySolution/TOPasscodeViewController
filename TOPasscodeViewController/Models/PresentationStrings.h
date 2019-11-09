@@ -22,6 +22,10 @@ typedef struct _PresentationStrings {
     NSString * _Nonnull setPassCodePage_ConfirmNewPasscode;
     NSString * _Nonnull currentPassCodeEnterViewTitle;
     NSString * _Nonnull setPassCodePage_DidnotMatch;
+    
+    NSString * _Nonnull setPassCodePage_PasscodeOptionsButton; // NSLocalizedString(@"Passcode Options", @"")
+    NSString * _Nonnull setPassCodePage_FailedPassCodeAttempts;
+    
 } PresentationStrings;
 
 
