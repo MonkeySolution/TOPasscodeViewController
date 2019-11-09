@@ -455,9 +455,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				22E2034523656ADB00B2FBB4 /* TOPasscodeViewController */,
 				22F806A21ECABB3D0053C94E /* TOPasscodeViewControllerExample */,
 				22F806BB1ECABB3D0053C94E /* TOPasscodeViewControllerExampleTests */,
-				22E2034523656ADB00B2FBB4 /* TOPasscodeViewController */,
 			);
 		};
 /* End PBXProject section */
