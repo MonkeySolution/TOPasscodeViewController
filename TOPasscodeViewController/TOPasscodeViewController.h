@@ -23,7 +23,7 @@
 #import <UIKit/UIKit.h>
 #import "TOPasscodeViewControllerConstants.h"
 #import "TOPasscodeView.h"
-#import "Models/PresentationStrings.h"
+#import "PresentationStrings.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
