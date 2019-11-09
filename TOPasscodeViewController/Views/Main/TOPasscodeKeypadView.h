@@ -21,6 +21,7 @@
 //  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
+#import "PresentationStrings.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -95,6 +96,8 @@ NS_ASSUME_NONNULL_BEGIN
  @param duration The animation length of the transition.
  */
 - (void)setHorizontalLayout:(BOOL)horizontalLayout animated:(BOOL)animated duration:(CGFloat)duration;
+
+- (instancetype)init:(PresentationStrings *)presentationStrings;
 
 @end
 

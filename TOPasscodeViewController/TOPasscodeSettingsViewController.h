@@ -22,6 +22,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TOPasscodeViewControllerConstants.h"
+#import "PresentationStrings.h"
 
 @class TOPasscodeSettingsViewController;
 
@@ -74,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) TOPasscodeSettingsViewState state;
 
 /** Set the visual style of the view controller (light or dark) */
-@property (nonatomic, assign) TOPasscodeSettingsViewStyle style;
+//@property (nonatomic, assign) TOPasscodeSettingsViewStyle style;
 
 /** The input type of the passcode */
 @property (nonatomic, assign) TOPasscodeType passcodeType;
@@ -93,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param style The visual style of the view controller
  */
-- (instancetype)initWithStyle:(TOPasscodeSettingsViewStyle)style;
+- (instancetype)initWithPresentationString:(PresentationStrings)presentationString ;
 
 /*
  Changes the passcode type and animates if required

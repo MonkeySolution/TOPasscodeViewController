@@ -9,9 +9,10 @@
 #import "ViewController.h"
 #import "TOPasscodeViewController.h"
 #import "SettingsViewController.h"
+#import "TOPasscodeSettingsViewController.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 
-@interface ViewController () <TOPasscodeViewControllerDelegate>
+@interface ViewController () <TOPasscodeViewControllerDelegate, TOPasscodeSettingsViewControllerDelegate>
 
 @property (nonatomic, copy) NSString *passcode;
 @property (nonatomic, assign) BOOL showButtonLettering;
@@ -31,7 +32,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
+    self.navigationController.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
     self.passcode = @"1234";
     self.showButtonLettering = YES;
 
@@ -49,9 +51,13 @@
 
 - (IBAction)showButtonTapped:(id)sender
 {
-    TOPasscodeViewController *passcodeViewController = [[TOPasscodeViewController alloc] initWithStyle:self.style passcodeType:self.type];
+    PresentationStrings presentationString;
+    presentationString.passCodeEnterViewTitle = @"Enter PASS";
+    presentationString.letteredTitles = @[@"ABC", @"DEF", @"GHI", @"JKL", @"MNO", @"PQRS", @"TUV", @"WXYZ"];
+    TOPasscodeViewController *passcodeViewController = [[TOPasscodeViewController alloc] initWithStyle:self.style passcodeType:TOPasscodeTypeFourDigits presentationString: presentationString];
     passcodeViewController.delegate = self;
-    passcodeViewController.allowBiometricValidation = self.biometricsAvailable;
+    passcodeViewController.allowCancel = false;
+    passcodeViewController.allowBiometricValidation = false; //self.biometricsAvailable;
     passcodeViewController.biometryType = self.faceIDAvailable ? TOPasscodeBiometryTypeFaceID : TOPasscodeBiometryTypeTouchID;
     passcodeViewController.keypadButtonShowLettering = self.showButtonLettering;
     [self presentViewController:passcodeViewController animated:YES completion:nil];
@@ -59,6 +65,24 @@
 
 - (IBAction)settingsButtonTapped:(id)sender
 {
+    //self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
+    PresentationStrings presentationString;
+    presentationString.cancelButtonTitle = @"Cancel";
+    presentationString.passCodeEnterViewTitle = @"Enter PASS";
+    presentationString.letteredTitles = @[@"ABC", @"DEF", @"GHI", @"JKL", @"MNO", @"PQRS", @"TUV", @"WXYZ"];
+    presentationString.setPassCodePage_Title = @"Set Passcode";
+    presentationString.setPassCodePage_DidnotMatch = @"Passcode didn't match.";
+    presentationString.setPassCodePage_EnterCurrentPasscode = @"Enter current passcode";
+    presentationString.setPassCodePage_EnterNewPasscode = @"Enter new passcode";
+    presentationString.setPassCodePage_ConfirmNewPasscode = @"Confirm new passcode";
+    TOPasscodeSettingsViewController *settingsController = [[TOPasscodeSettingsViewController alloc] initWithPresentationString: presentationString];
+    
+    settingsController.passcodeType = TOPasscodeTypeFourDigits;
+    settingsController.delegate = self;
+    settingsController.requireCurrentPasscode = YES;
+    [self.navigationController pushViewController:settingsController animated:YES];
+    //[self presentViewController:settingsController animated:YES completion:nil];
+    /*
     SettingsViewController *controller = [[SettingsViewController alloc] init];
     controller.passcode = self.passcode;
     controller.passcodeType = self.type;
@@ -84,6 +108,21 @@
     controller.wallpaperChangedHandler = ^(UIImage *image) {
         weakSelf.imageView.image = image;
     };
+    */
+}
+
+- (BOOL)passcodeSettingsViewController:(TOPasscodeSettingsViewController *)passcodeSettingsViewController didAttemptCurrentPasscode:(NSString *)passcode
+{
+    return [passcode isEqualToString:self.passcode];
+}
+
+- (void)passcodeSettingsViewController:(TOPasscodeSettingsViewController *)passcodeSettingsViewController didChangeToNewPasscode:(NSString *)passcode ofType:(TOPasscodeType)type
+{
+    self.passcode = passcode;
+    //self.passcodeType = type;
+    //[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    //[self.navigationController popViewControllerAnimated:YES];
+    [passcodeSettingsViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didTapCancelInPasscodeViewController:(TOPasscodeViewController *)passcodeViewController

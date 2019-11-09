@@ -52,6 +52,7 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
 /* Bar Items */
 @property (nonatomic, strong) UIBarButtonItem *nextBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *doneBarButtonItem;
+@property (nonatomic, readonly) PresentationStrings presentationString;
 
 @end
 
@@ -59,10 +60,10 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
 
 #pragma mark - Object Creation -
 
-- (instancetype)initWithStyle:(TOPasscodeSettingsViewStyle)style
+- (instancetype)initWithPresentationString:(PresentationStrings)presentationString
 {
     if (self = [self initWithNibName:nil bundle:nil]) {
-        _style = style;
+        _presentationString = presentationString;
         [self setUp];
     }
 
@@ -93,10 +94,13 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Set background color
+    self.view.backgroundColor = UIColor.systemBackgroundColor;
 
     __weak typeof(self) weakSelf = self;
 
-    self.title = NSLocalizedString(@"Enter Passcode", @"");
+    self.title = _presentationString.setPassCodePage_Title;
+    //NSLocalizedString(@"Enter Passcode", @"");
 
     // Create container view
     self.containerView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -108,8 +112,8 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.titleLabel.font = [UIFont systemFontOfSize:17.0f];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.textColor = [UIColor blackColor];
-    self.titleLabel.text = @"Enter your passcode";
+    self.titleLabel.textColor = [UIColor labelColor];
+    self.titleLabel.text = _presentationString.currentPassCodeEnterViewTitle;
     self.titleLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [self.titleLabel sizeToFit];
     [self.containerView addSubview:self.titleLabel];
@@ -123,7 +127,7 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
     [self.containerView addSubview:self.inputField];
 
     // Create keypad view
-    self.keypadView = [[TOPasscodeSettingsKeypadView alloc] initWithFrame:CGRectZero];
+    self.keypadView = [[TOPasscodeSettingsKeypadView alloc] init: &_presentationString];
     self.keypadView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     [self.view addSubview:self.keypadView];
 
@@ -136,7 +140,9 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
 
     // Create error label view
     self.errorLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    self.errorLabel.text = NSLocalizedString(@"Passcodes didn't match. Try again.", @"");
+    self.errorLabel.text = _presentationString.setPassCodePage_DidnotMatch;
+    self.errorLabel.textColor = UIColor.labelColor;
+    //NSLocalizedString(@"Passcodes didn't match. Try again.", @"");
     self.errorLabel.textAlignment = NSTextAlignmentCenter;
     self.errorLabel.font = [UIFont systemFontOfSize:15.0f];
     self.errorLabel.numberOfLines = 0;
@@ -145,6 +151,7 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
     [self.containerView addSubview:self.errorLabel];
 
     // Create Options button
+  
     self.optionsButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.optionsButton setTitle:NSLocalizedString(@"Passcode Options", @"") forState:UIControlStateNormal];
     self.optionsButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
@@ -177,7 +184,17 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
     self.doneBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTapped:)];
 
     // Apply light/dark mode
-    [self applyThemeForStyle:self.style];
+    //[self applyThemeForStyle:self.style];
+    // Set the label style
+    self.titleLabel.textColor = UIColor.labelColor;
+
+    // Set the number input tint
+    self.inputField.tintColor = UIColor.labelColor;
+    
+    // Set the tint color of the incorrect warning label
+    UIColor *warningColor = nil;
+    
+    warningColor = [UIColor colorWithRed:214.0f/255.0f green:63.0f/255.0f blue:63.0f/255.0f alpha:1.0f];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -218,7 +235,8 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
     // Update text depending on state
     switch (state) {
         case TOPasscodeSettingsViewStateEnterCurrentPasscode:
-            self.titleLabel.text = NSLocalizedString(@"Enter your passcode", @"");
+            self.titleLabel.text = self.presentationString.setPassCodePage_EnterCurrentPasscode;
+            //NSLocalizedString(@"Enter your passcode", @"");
             self.navigationItem.rightBarButtonItem = variableSizePasscode ? self.nextBarButtonItem : nil;
             if (@available(iOS 9.0, *)) {
                 self.inputField.returnKeyType = UIReturnKeyContinue;
@@ -228,7 +246,8 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
             }
             break;
         case TOPasscodeSettingsViewStateEnterNewPasscode:
-            self.titleLabel.text = NSLocalizedString(@"Enter a new passcode", @"");
+            self.titleLabel.text = self.presentationString.setPassCodePage_EnterNewPasscode;
+            //NSLocalizedString(@"Enter a new passcode", @"");
             self.navigationItem.rightBarButtonItem = variableSizePasscode ? self.nextBarButtonItem : nil;
             if (@available(iOS 9.0, *)) {
                 self.inputField.returnKeyType = UIReturnKeyContinue;
@@ -238,7 +257,8 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
             }
             break;
         case TOPasscodeSettingsViewStateConfirmNewPasscode:
-            self.titleLabel.text = NSLocalizedString(@"Confirm new passcode", @"");
+            self.titleLabel.text = self.presentationString.setPassCodePage_ConfirmNewPasscode;
+            //NSLocalizedString(@"Confirm new passcode", @"");
             self.navigationItem.rightBarButtonItem = variableSizePasscode ? self.doneBarButtonItem : nil;
             self.inputField.returnKeyType = UIReturnKeyDone;
             break;
@@ -413,42 +433,6 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
     self.errorLabel.frame = CGRectIntegral(frame);
 }
 
-- (void)applyThemeForStyle:(TOPasscodeSettingsViewStyle)style
-{
-    BOOL isDark = (style == TOPasscodeSettingsViewStyleDark);
-
-    // Set background color
-    UIColor *backgroundColor;
-    if (isDark) {
-        backgroundColor = [UIColor colorWithWhite:0.15f alpha:1.0f];
-    }
-    else {
-        backgroundColor = [UIColor colorWithRed:235.0f/255.0f green:235.0f/255.0f blue:241.0f/255.0f alpha:1.0f];
-    }
-    self.view.backgroundColor = backgroundColor;
-
-    // Set the style of the keypad view
-    self.keypadView.style = style;
-
-    // Set the color for the input content
-    UIColor *inputColor = isDark ? [UIColor whiteColor] : [UIColor blackColor];
-
-    // Set the label style
-    self.titleLabel.textColor = inputColor;
-
-    // Set the number input tint
-    self.inputField.tintColor = inputColor;
-
-    // Set the tint color of the incorrect warning label
-    UIColor *warningColor = nil;
-    if (isDark) {
-        warningColor = [UIColor colorWithRed:214.0f/255.0f green:63.0f/255.0f blue:63.0f/255.0f alpha:1.0f];
-    }
-    else {
-        warningColor = [UIColor colorWithRed:214.0f/255.0f green:63.0f/255.0f blue:63.0f/255.0f alpha:1.0f];
-    }
-}
-
 #pragma mark - Data Management -
 - (void)inputViewDidCompletePasscode:(NSString *)passcode
 {
@@ -560,7 +544,7 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
     }
 
     // Cancel button 
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"") style:UIAlertActionStyleCancel handler:nil]];
+    [alertController addAction:[UIAlertAction actionWithTitle:self.presentationString.cancelButtonTitle style:UIAlertActionStyleCancel handler:nil]];
 
     alertController.modalPresentationStyle = UIModalPresentationPopover;
     alertController.popoverPresentationController.sourceView = self.optionsButton;

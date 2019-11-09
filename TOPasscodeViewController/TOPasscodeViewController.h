@@ -23,6 +23,8 @@
 #import <UIKit/UIKit.h>
 #import "TOPasscodeViewControllerConstants.h"
 #import "TOPasscodeView.h"
+#import "Models/PresentationStrings.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -143,7 +145,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param style The visual style of the view controller (light/translucent)
  @param type The type of passcode to enter (6-digit/numeric)
  */
-- (instancetype)initWithStyle:(TOPasscodeViewStyle)style passcodeType:(TOPasscodeType)type;
+- (instancetype)initWithStyle:(TOPasscodeViewStyle)style passcodeType:(TOPasscodeType)type presentationString:(PresentationStrings )presentationStrings;
 
 /**
  Hide everything except the background translucency view.

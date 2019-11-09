@@ -38,6 +38,7 @@
 
 /* The type of passcode we're displaying */
 @property (nonatomic, assign, readwrite) TOPasscodeType passcodeType;
+@property (nonatomic, readwrite) PresentationStrings *presentationStrings;
 
 @end
 
@@ -52,9 +53,10 @@
     return self;
 }
 
-- (instancetype)initWithStyle:(TOPasscodeViewStyle)style passcodeType:(TOPasscodeType)type
+- (instancetype)initWithStyle:(TOPasscodeViewStyle)style passcodeType:(TOPasscodeType)type presentationString:(PresentationStrings *)presentationStrings
 {
     if (self = [super initWithFrame:CGRectMake(0,0,320,393)]) {
+        _presentationStrings = presentationStrings;
         _style = style;
         _passcodeType = type;
         [self setUp];
@@ -62,6 +64,7 @@
 
     return self;
 }
+
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -80,7 +83,8 @@
     _currentLayout = _defaultContentLayout;
     _contentLayouts = @[[TOPasscodeViewContentLayout mediumScreenContentLayout],
                         [TOPasscodeViewContentLayout smallScreenContentLayout]];
-    _titleText = NSLocalizedString(@"Enter Passcode", @"");
+    _titleText = self.presentationStrings->passCodeEnterViewTitle;
+    //NSLocalizedString(@"Enter Passcode", @"");
 
     // Start configuring views
     [self setUpViewForType:self.passcodeType];
@@ -211,7 +215,7 @@
 - (void)sizeToFitSize:(CGSize)size
 {
     CGFloat width = size.width;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         width = MIN(size.width, size.height);
     }
 
@@ -364,7 +368,7 @@
     // Set up pad row
     if (type != TOPasscodeTypeCustomAlphanumeric) {
         if (self.keypadView == nil) {
-            self.keypadView = [[TOPasscodeKeypadView alloc] init];
+            self.keypadView = [[TOPasscodeKeypadView alloc] init:(self.presentationStrings)];
         }
         self.keypadView.buttonTappedHandler = ^(NSInteger button) {
             NSString *numberString = [NSString stringWithFormat:@"%ld", (long)button];

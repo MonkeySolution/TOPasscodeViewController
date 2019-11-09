@@ -22,6 +22,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TOPasscodeViewControllerConstants.h"
+#import "PresentationStrings.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -35,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL enabled;
 
 /* Whether the view is currently light mode or dark. */
-@property (nonatomic, assign) TOPasscodeSettingsViewStyle style;
+//@property (nonatomic, assign) TOPasscodeSettingsViewStyle style;
 
 /* The color of the separator line */
 @property (nonatomic, strong) UIColor *separatorLineColor;
@@ -68,6 +69,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* In really small sizes, set the keypad labels to horizontal */
 - (void)setButtonLabelHorizontalLayout:(BOOL)horizontal animated:(BOOL)animated;
+
+- (instancetype)init:(PresentationStrings *) presentationStrings;
 
 @end
 

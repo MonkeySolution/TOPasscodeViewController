@@ -26,6 +26,8 @@
 #import "TOPasscodeKeypadView.h"
 #import "TOPasscodeInputField.h"
 
+
+
 @interface TOPasscodeViewController () <UIViewControllerTransitioningDelegate>
 
 /* State */
@@ -41,7 +43,7 @@
 @property (nonatomic, strong, readwrite) TOPasscodeView *passcodeView;
 @property (nonatomic, strong, readwrite) UIButton *biometricButton;
 @property (nonatomic, strong, readwrite) UIButton *cancelButton;
-
+@property (nonatomic, readwrite) PresentationStrings presentationStrings;
 
 @end
 
@@ -49,11 +51,32 @@
 
 #pragma mark - Instance Creation -
 
-- (instancetype)initWithStyle:(TOPasscodeViewStyle)style passcodeType:(TOPasscodeType)type
+- (instancetype)initWithStyle:(TOPasscodeViewStyle)style passcodeType:(TOPasscodeType)type presentationString:(PresentationStrings )presentationStrings
 {
     if (self = [super initWithNibName:nil bundle:nil]) {
+        _presentationStrings = presentationStrings;
         _style = style;
         _passcodeType = type;
+        
+        /// Fix Missing Values:
+        if(_presentationStrings.passCodeEnterViewTitle == NULL){
+            _presentationStrings.passCodeEnterViewTitle = NSLocalizedString(@"Enter passcode", @"Enter passcode");
+        }
+        if(_presentationStrings.cancelButtonTitle == NULL){
+            _presentationStrings.cancelButtonTitle = NSLocalizedString(@"Cancel", @"Cancel");
+        }
+        if(_presentationStrings.deleteButtonTitle == NULL){
+            _presentationStrings.deleteButtonTitle = NSLocalizedString(@"Delete", @"Delete");
+        }
+        
+        if(_presentationStrings.faceIdButtonTitle == NULL){
+            _presentationStrings.faceIdButtonTitle = NSLocalizedString(@"Face ID", @"Face ID");
+        }
+        
+        if(_presentationStrings.letteredTitles == NULL){
+            _presentationStrings.letteredTitles = @[@"ABC", @"DEF", @"GHI", @"JKL", @"MNO", @"PQRS", @"TUV", @"WXYZ"];
+        }
+        
         [self setUp];
     }
 
@@ -151,7 +174,7 @@
 - (void)setUpAccessoryButtons
 {
     UIFont *buttonFont = [UIFont systemFontOfSize:16.0f];
-    BOOL isPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+    BOOL isPad = UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad;
 
     if (!self.leftAccessoryButton && self.allowBiometricValidation && !self.biometricButton) {
         self.biometricButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -174,7 +197,7 @@
 
     if (!self.rightAccessoryButton && !self.cancelButton) {
         self.cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [self.cancelButton setTitle:NSLocalizedString(@"Cancel", @"Cancel") forState:UIControlStateNormal];
+        [self.cancelButton setTitle:self.presentationStrings.cancelButtonTitle forState:UIControlStateNormal];
         self.cancelButton.titleLabel.font = buttonFont;
         [self.cancelButton addTarget:self action:@selector(accessoryButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         // If cancelling is disabled, we hide the cancel button but we still create it, because it can
@@ -257,6 +280,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setHidden:YES];
     [self setNeedsStatusBarAppearanceUpdate];
 
     // Force an initial layout if the view hasn't been presented yet
@@ -292,7 +316,7 @@
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 
     // We don't need to do anything special on iPad or if we're using character input
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad || self.passcodeType == TOPasscodeTypeCustomAlphanumeric) { return; }
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad || self.passcodeType == TOPasscodeTypeCustomAlphanumeric) { return; }
 
     // Work out if we need to transition to horizontal
     BOOL horizontalLayout = size.height < size.width;
@@ -323,7 +347,7 @@
 - (void)updateAccessoryButtonFontsForSize:(CGSize)size
 {
     CGFloat width = size.width;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         width = MIN(size.width, size.height);
     }
 
@@ -413,7 +437,7 @@
 - (void)layoutAccessoryButtonsForSize:(CGSize)size
 {
     // The buttons are always embedded in the keypad view on iPad
-    if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPhone) { return; }
+    if (UIDevice.currentDevice.userInterfaceIdiom != UIUserInterfaceIdiomPhone) { return; }
 
     if (self.passcodeView.horizontalLayout && self.passcodeType != TOPasscodeTypeCustomAlphanumeric) {
         [self horizontalLayoutAccessoryButtonsForSize:size];
@@ -449,10 +473,13 @@
 {
     NSString *title = nil;
     if (self.passcodeView.passcode.length > 0) {
-        title = NSLocalizedString(@"Delete", @"Delete");
+        title = self.presentationStrings.deleteButtonTitle;
+        //NSLocalizedString(@"Delete", @"Delete");
     } else if (self.allowCancel) {
-        title = NSLocalizedString(@"Cancel", @"Cancel");
+        title = self.presentationStrings.cancelButtonTitle;
+        //NSLocalizedString(@"Cancel", @"Cancel");
     }
+    
     [UIView performWithoutAnimation:^{
         if (title != nil) {
             [self.cancelButton setTitle:title forState:UIControlStateNormal];
@@ -542,7 +569,7 @@
 {
     if (_passcodeView) { return _passcodeView; }
 
-    _passcodeView = [[TOPasscodeView alloc] initWithStyle:self.style passcodeType:self.passcodeType];
+    _passcodeView = [[TOPasscodeView alloc] initWithStyle:self.style passcodeType:self.passcodeType presentationString: &_presentationStrings ];
     _passcodeView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin |
                                     UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [_passcodeView sizeToFit];
@@ -559,7 +586,7 @@
     };
 
     // Set initial layout to horizontal if we're rotated on an iPhone
-    if (self.passcodeType != TOPasscodeTypeCustomAlphanumeric && UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
+    if (self.passcodeType != TOPasscodeTypeCustomAlphanumeric && UIDevice.currentDevice.userInterfaceIdiom != UIUserInterfaceIdiomPad) {
         CGSize boundsSize = self.view.bounds.size;
         _passcodeView.horizontalLayout = boundsSize.width > boundsSize.height;
     }

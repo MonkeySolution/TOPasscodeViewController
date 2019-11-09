@@ -37,17 +37,19 @@ const CGFloat kTOPasscodeSettingsKeypadCornderRadius = 12.0f;
 
 @property (nonatomic, strong) UIImage *buttonBackgroundImage;
 @property (nonatomic, strong) UIImage *buttonTappedBackgroundImage;
-
+@property (nonatomic, readwrite) PresentationStrings *presentationStrings;
 @end
 
 @implementation TOPasscodeSettingsKeypadView
 
-- (instancetype)initWithFrame:(CGRect)frame
+
+- (instancetype)init:(PresentationStrings *) presentationStrings
 {
-    if (self = [super initWithFrame:frame]) {
+    self = [super init];
+    if (self) {
+        _presentationStrings = presentationStrings;
         [self setUp];
     }
-
     return self;
 }
 
@@ -69,15 +71,33 @@ const CGFloat kTOPasscodeSettingsKeypadCornderRadius = 12.0f;
     [self setUpKeypadButtons];
     [self setUpDeleteButton];
 
-    [self setUpDefaultValuesForStye:_style];
-    [self applyTheme];
+    
+    // Keypad label
+    self.keypadButtonLabelTextColor = UIColor.labelColor;
+
+    self.keypadButtonForegroundColor = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) ? UIColor.systemGray2Color : UIColor.systemBackgroundColor;
+    //(self.overrideUserInterfaceStyle == UIUserInterfaceStyleDark) ? [UIColor colorWithWhite:0.35f alpha:1.0f] : [UIColor whiteColor];
+    self.keypadButtonTappedForegroundColor = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) ? UIColor.systemGray4Color : UIColor.tertiarySystemBackgroundColor;
+    self.keypadButtonBorderColor = UIColor.tertiarySystemBackgroundColor;
+    self.backgroundColor = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) ? UIColor.tertiarySystemBackgroundColor : UIColor.systemGray4Color;
+    self.separatorView.backgroundColor = UIColor.quaternaryLabelColor;
+    self.deleteButton.tintColor = UIColor.labelColor;
+    
+    for (TOPasscodeSettingsKeypadButton *button in self.keypadButtons) {
+        button.buttonLabel.textColor = self.keypadButtonLabelTextColor;
+        button.buttonLabel.letteringCharacterSpacing = self.keypadButtonLetteringSpacing;
+        button.buttonLabel.letteringVerticalSpacing = self.keypadButtonVerticalSpacing;
+        button.buttonLabel.letteringHorizontalSpacing = self.keypadButtonHorizontalSpacing;
+        button.buttonLabel.numberLabelFont = self.keypadButtonNumberFont;
+        button.buttonLabel.letteringLabelFont = self.keypadButtonLetteringFont;
+    }
 }
 
 - (void)setUpKeypadButtons
 {
     NSInteger numberOfButtons = 10;
-    NSArray *letteredTitles = @[@"ABC", @"DEF", @"GHI", @"JKL",
-                                @"MNO", @"PQRS", @"TUV", @"WXYZ"];
+    NSArray *letteredTitles = self.presentationStrings->letteredTitles;
+  //@[@"ABC", @"DEF", @"GHI", @"JKL", @"MNO", @"PQRS", @"TUV", @"WXYZ"];
 
     NSMutableArray *buttons = [NSMutableArray arrayWithCapacity:10];
     for (NSInteger i = 0; i < numberOfButtons; i++) {
@@ -115,49 +135,6 @@ const CGFloat kTOPasscodeSettingsKeypadCornderRadius = 12.0f;
     [self addSubview:self.deleteButton];
 }
 
-- (void)setUpDefaultValuesForStye:(TOPasscodeSettingsViewStyle)style
-{
-    BOOL isDark = style == TOPasscodeSettingsViewStyleDark;
-
-    // Keypad label
-    self.keypadButtonLabelTextColor = isDark ? [UIColor whiteColor] : [UIColor blackColor];
-
-    self.keypadButtonForegroundColor = isDark ? [UIColor colorWithWhite:0.35f alpha:1.0f] : [UIColor whiteColor];
-    self.keypadButtonTappedForegroundColor = isDark ? [UIColor colorWithWhite:0.45f alpha:1.0f] : [UIColor colorWithWhite:0.85f alpha:1.0f];
-
-    // Button border color
-    UIColor *borderColor = nil;
-    if (isDark) {
-        borderColor = [UIColor colorWithWhite:0.15f alpha:1.0f];
-    }
-    else {
-        borderColor = [UIColor colorWithRed:166.0f/255.0f green:174.0f/255.0f blue:186.0f/255.0f alpha:1.0f];
-    }
-    self.keypadButtonBorderColor = borderColor;
-
-    // Background Color
-    UIColor *backgroundColor = nil;
-    if (isDark) {
-        backgroundColor = [UIColor colorWithWhite:0.18f alpha:1.0f];
-    }
-    else {
-        backgroundColor = [UIColor colorWithRed:220.0f/255.0f green:225.0f/255.0f blue:232.0f/255.0f alpha:1.0f];
-    }
-    self.backgroundColor = backgroundColor;
-
-    // Separator lines
-    UIColor *separatorColor = nil;
-    if (isDark) {
-        separatorColor = [UIColor colorWithWhite:0.25f alpha:1.0f];
-    }
-    else {
-        separatorColor = [UIColor colorWithWhite:0.7f alpha:1.0f];
-    }
-    self.separatorView.backgroundColor = separatorColor;
-
-    self.deleteButton.tintColor = isDark ? [UIColor whiteColor] : [UIColor blackColor];
-}
-
 - (void)setUpImagesIfNeeded
 {
     if (self.buttonBackgroundImage && self.buttonTappedBackgroundImage) {
@@ -181,18 +158,6 @@ const CGFloat kTOPasscodeSettingsKeypadCornderRadius = 12.0f;
     for (TOPasscodeSettingsKeypadButton *button in self.keypadButtons) {
         button.buttonBackgroundImage = self.buttonBackgroundImage;
         button.buttonTappedBackgroundImage = self.buttonTappedBackgroundImage;
-    }
-}
-
-- (void)applyTheme
-{
-    for (TOPasscodeSettingsKeypadButton *button in self.keypadButtons) {
-        button.buttonLabel.textColor = self.keypadButtonLabelTextColor;
-        button.buttonLabel.letteringCharacterSpacing = self.keypadButtonLetteringSpacing;
-        button.buttonLabel.letteringVerticalSpacing = self.keypadButtonVerticalSpacing;
-        button.buttonLabel.letteringHorizontalSpacing = self.keypadButtonHorizontalSpacing;
-        button.buttonLabel.numberLabelFont = self.keypadButtonNumberFont;
-        button.buttonLabel.letteringLabelFont = self.keypadButtonLetteringFont;
     }
 }
 
@@ -278,17 +243,6 @@ const CGFloat kTOPasscodeSettingsKeypadCornderRadius = 12.0f;
 
 #pragma mark - Accessors -
 
-- (void)setStyle:(TOPasscodeSettingsViewStyle)style
-{
-    if (style == _style) {
-        return;
-    }
-
-    _style = style;
-    [self setUpDefaultValuesForStye:_style];
-    [self applyTheme];
-}
-
 #pragma mark - Label Layout -
 - (void)setButtonLabelHorizontalLayout:(BOOL)buttonLabelHorizontalLayout
 {
@@ -338,8 +292,7 @@ const CGFloat kTOPasscodeSettingsKeypadCornderRadius = 12.0f;
     _keypadButtonForegroundColor = keypadButtonForegroundColor;
 
     if (_keypadButtonForegroundColor == nil) {
-        BOOL isDark = self.style == TOPasscodeSettingsViewStyleDark;
-        _keypadButtonForegroundColor = isDark ? [UIColor colorWithWhite:0.3f alpha:1.0f] : [UIColor whiteColor];
+        _keypadButtonForegroundColor = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) ? [UIColor colorWithWhite:0.3f alpha:1.0f] : [UIColor whiteColor];
     }
 
     self.buttonBackgroundImage = nil;
@@ -352,7 +305,7 @@ const CGFloat kTOPasscodeSettingsKeypadCornderRadius = 12.0f;
     _keypadButtonBorderColor = keypadButtonBorderColor;
 
     if (_keypadButtonBorderColor == nil) {
-        BOOL isDark = self.style == TOPasscodeSettingsViewStyleDark;
+        BOOL isDark = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark);
         UIColor *borderColor = nil;
         if (isDark) {
             borderColor = [UIColor colorWithWhite:0.2 alpha:1.0f];
@@ -373,7 +326,7 @@ const CGFloat kTOPasscodeSettingsKeypadCornderRadius = 12.0f;
     _keypadButtonTappedForegroundColor = keypadButtonTappedForegroundColor;
 
     if (_keypadButtonTappedForegroundColor == nil) {
-        BOOL isDark = self.style == TOPasscodeSettingsViewStyleDark;
+        BOOL isDark = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark);
         _keypadButtonTappedForegroundColor = isDark ? [UIColor colorWithWhite:0.4f alpha:1.0f] : [UIColor colorWithWhite:0.85f alpha:1.0f];
     }
 

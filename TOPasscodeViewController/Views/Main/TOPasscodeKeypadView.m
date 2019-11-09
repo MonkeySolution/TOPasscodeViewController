@@ -38,12 +38,21 @@
 /* Images */
 @property (nonatomic, strong) UIImage *buttonImage;
 @property (nonatomic, strong) UIImage *tappedButtonImage;
-
+@property (nonatomic, readwrite) PresentationStrings *presentationStrings;
 @end
 
 @implementation TOPasscodeKeypadView
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)init:(PresentationStrings *)presentationStrings
+{
+    self = [super init];
+    if (self) {
+        _presentationStrings = presentationStrings;
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame 
 {
     if (self = [super initWithFrame:frame]) {
         self.userInteractionEnabled = YES;
@@ -86,8 +95,8 @@
     NSMutableArray *buttons = [NSMutableArray array];
 
     NSInteger numberOfButtons = 11; // 1-9 are normal, 10 is the vertical '0', 11 is the horizontal '0'
-    NSArray *letteredTitles = @[@"ABC", @"DEF", @"GHI", @"JKL",
-                                @"MNO", @"PQRS", @"TUV", @"WXYZ"];
+    NSArray *letteredTitles = self.presentationStrings->letteredTitles;
+    //@[@"ABC", @"DEF", @"GHI", @"JKL", @"MNO", @"PQRS", @"TUV", @"WXYZ"];
 
     for (NSInteger i = 0; i < numberOfButtons; i++) {
         // Work out the button number text

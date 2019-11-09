@@ -22,6 +22,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TOPasscodeViewControllerConstants.h"
+#import "PresentationStrings.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -94,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param style The visual style of the passcode view.
  @param type The type of passcode to accept.
  */
-- (instancetype)initWithStyle:(TOPasscodeViewStyle)style passcodeType:(TOPasscodeType)type;
+- (instancetype)initWithStyle:(TOPasscodeViewStyle)style passcodeType:(TOPasscodeType)type presentationString:(PresentationStrings *)presentationStrings;
 
 /*
  Resize the view and all subviews for the optimum size to fit a super view of the suplied width.
