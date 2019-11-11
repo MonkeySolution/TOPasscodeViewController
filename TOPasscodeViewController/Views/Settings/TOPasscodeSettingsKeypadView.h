@@ -22,7 +22,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TOPasscodeViewControllerConstants.h"
-#import "PresentationStrings.h"
+#import "TOPasscodePresentationStrings.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 /* In really small sizes, set the keypad labels to horizontal */
 - (void)setButtonLabelHorizontalLayout:(BOOL)horizontal animated:(BOOL)animated;
 
-- (instancetype)init:(PresentationStrings *) presentationStrings;
+- (instancetype)init:(TOPasscodePresentationStrings *) presentationStrings;
 
 @end
 

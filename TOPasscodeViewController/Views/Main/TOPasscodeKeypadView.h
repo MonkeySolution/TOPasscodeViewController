@@ -21,7 +21,7 @@
 //  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
-#import "PresentationStrings.h"
+#import "TOPasscodePresentationStrings.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)setHorizontalLayout:(BOOL)horizontalLayout animated:(BOOL)animated duration:(CGFloat)duration;
 
-- (instancetype)init:(PresentationStrings *)presentationStrings;
+- (instancetype)init:(TOPasscodePresentationStrings *)presentationStrings;
 
 @end
 

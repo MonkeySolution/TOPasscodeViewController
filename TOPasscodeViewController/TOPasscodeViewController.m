@@ -43,7 +43,7 @@
 @property (nonatomic, strong, readwrite) TOPasscodeView *passcodeView;
 @property (nonatomic, strong, readwrite) UIButton *biometricButton;
 @property (nonatomic, strong, readwrite) UIButton *cancelButton;
-@property (nonatomic, readwrite) PresentationStrings presentationStrings;
+@property (nonatomic, readwrite) TOPasscodePresentationStrings presentationStrings;
 
 @end
 
@@ -51,7 +51,7 @@
 
 #pragma mark - Instance Creation -
 
-- (instancetype)initWithStyle:(TOPasscodeViewStyle)style passcodeType:(TOPasscodeType)type presentationString:(PresentationStrings )presentationStrings
+- (instancetype)initWithStyle:(TOPasscodeViewStyle)style passcodeType:(TOPasscodeType)type presentationString:(TOPasscodePresentationStrings )presentationStrings
 {
     if (self = [super initWithNibName:nil bundle:nil]) {
         _presentationStrings = presentationStrings;

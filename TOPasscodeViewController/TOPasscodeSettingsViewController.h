@@ -22,7 +22,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TOPasscodeViewControllerConstants.h"
-#import "PresentationStrings.h"
+#import "TOPasscodePresentationStrings.h"
 
 @class TOPasscodeSettingsViewController;
 
@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param style The visual style of the view controller
  */
-- (instancetype)initWithPresentationString:(PresentationStrings)presentationString ;
+- (instancetype)initWithPresentationString:(TOPasscodePresentationStrings)presentationString ;
 
 /*
  Changes the passcode type and animates if required

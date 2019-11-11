@@ -9,7 +9,7 @@
 #ifndef PresentationStrings_h
 #define PresentationStrings_h
 
-typedef struct _PresentationStrings {
+typedef struct _TOPasscodePresentationStrings {
     NSString * _Nonnull passCodeEnterViewTitle;// = NSLocalizedString(@"Enter Passcode", @"");
     NSString * _Nonnull deleteButtonTitle;
     NSString * _Nonnull cancelButtonTitle;
@@ -26,7 +26,7 @@ typedef struct _PresentationStrings {
     NSString * _Nonnull setPassCodePage_PasscodeOptionsButton; // NSLocalizedString(@"Passcode Options", @"")
     NSString * _Nonnull setPassCodePage_FailedPassCodeAttempts;
     
-} PresentationStrings;
+} TOPasscodePresentationStrings;
 
 
 #endif /* PresentationStrings_h */

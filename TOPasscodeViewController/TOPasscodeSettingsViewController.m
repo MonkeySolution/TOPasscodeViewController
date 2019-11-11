@@ -52,7 +52,7 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
 /* Bar Items */
 @property (nonatomic, strong) UIBarButtonItem *nextBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *doneBarButtonItem;
-@property (nonatomic, readonly) PresentationStrings presentationString;
+@property (nonatomic, readonly) TOPasscodePresentationStrings presentationString;
 
 @end
 
@@ -60,7 +60,7 @@ const CGFloat kTOPasscodeKeypadMaxHeight = 330.0f;
 
 #pragma mark - Object Creation -
 
-- (instancetype)initWithPresentationString:(PresentationStrings)presentationString
+- (instancetype)initWithPresentationString:(TOPasscodePresentationStrings)presentationString
 {
     if (self = [self initWithNibName:nil bundle:nil]) {
         _presentationString = presentationString;

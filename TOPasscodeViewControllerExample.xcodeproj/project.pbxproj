@@ -71,7 +71,7 @@
 		22D601C423656D0200275AD9 /* TOPasscodeFixedInputView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2292C9A71F2491E500E3C2C8 /* TOPasscodeFixedInputView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		22D601C523656D0400275AD9 /* TOPasscodeVariableInputView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2292C9AB1F2491E500E3C2C8 /* TOPasscodeVariableInputView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		22EAD9DA1EFA4CEF00D0C408 /* TOSettingsKeypadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EAD9D91EFA4CEF00D0C408 /* TOSettingsKeypadImage.m */; };
-		C3624CC723795DB100D17B56 /* PresentationStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = C3624C9523762BBD00D17B56 /* PresentationStrings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3624CC723795DB100D17B56 /* TOPasscodePresentationStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = C3624C9523762BBD00D17B56 /* TOPasscodePresentationStrings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,7 +142,7 @@
 		22EAD9D91EFA4CEF00D0C408 /* TOSettingsKeypadImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TOSettingsKeypadImage.m; sourceTree = "<group>"; };
 		22F806A31ECABB3D0053C94E /* TOPasscodeViewControllerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TOPasscodeViewControllerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F806BC1ECABB3D0053C94E /* TOPasscodeViewControllerExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TOPasscodeViewControllerExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C3624C9523762BBD00D17B56 /* PresentationStrings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresentationStrings.h; sourceTree = "<group>"; };
+		C3624C9523762BBD00D17B56 /* TOPasscodePresentationStrings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TOPasscodePresentationStrings.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,7 +249,7 @@
 				2292C9B61F2491F000E3C2C8 /* TOPasscodeViewContentLayout.m */,
 				22D3610B1EDCC1CC002E5D35 /* TOPasscodeViewControllerAnimatedTransitioning.h */,
 				22D3610C1EDCC1CC002E5D35 /* TOPasscodeViewControllerAnimatedTransitioning.m */,
-				C3624C9523762BBD00D17B56 /* PresentationStrings.h */,
+				C3624C9523762BBD00D17B56 /* TOPasscodePresentationStrings.h */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -340,7 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22D601B423656CBF00275AD9 /* TOPasscodeViewController.h in Headers */,
-				C3624CC723795DB100D17B56 /* PresentationStrings.h in Headers */,
+				C3624CC723795DB100D17B56 /* TOPasscodePresentationStrings.h in Headers */,
 				22D601B523656CC100275AD9 /* TOPasscodeSettingsViewController.h in Headers */,
 				22D601BB23656CF100275AD9 /* TOPasscodeView.h in Headers */,
 				22D601B723656CE900275AD9 /* TOPasscodeCircleImage.h in Headers */,

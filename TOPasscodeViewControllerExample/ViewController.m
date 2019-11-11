@@ -51,7 +51,7 @@
 
 - (IBAction)showButtonTapped:(id)sender
 {
-    PresentationStrings presentationString;
+    TOPasscodePresentationStrings presentationString;
     presentationString.passCodeEnterViewTitle = @"Enter PASS";
     presentationString.letteredTitles = @[@"ABC", @"DEF", @"GHI", @"JKL", @"MNO", @"PQRS", @"TUV", @"WXYZ"];
     presentationString.setPassCodePage_FailedPassCodeAttempts = NSLocalizedString(@"%d Failed Passcode Attempts !!!", @"");
@@ -67,7 +67,7 @@
 - (IBAction)settingsButtonTapped:(id)sender
 {
     //self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
-    PresentationStrings presentationString;
+    TOPasscodePresentationStrings presentationString;
     presentationString.cancelButtonTitle = @"Cancel";
     presentationString.passCodeEnterViewTitle = @"Enter PASS";
     presentationString.letteredTitles = @[@"ABC", @"DEF", @"GHI", @"JKL", @"MNO", @"PQRS", @"TUV", @"WXYZ"];

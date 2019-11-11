@@ -37,13 +37,13 @@ const CGFloat kTOPasscodeSettingsKeypadCornderRadius = 12.0f;
 
 @property (nonatomic, strong) UIImage *buttonBackgroundImage;
 @property (nonatomic, strong) UIImage *buttonTappedBackgroundImage;
-@property (nonatomic, readwrite) PresentationStrings *presentationStrings;
+@property (nonatomic, readwrite) TOPasscodePresentationStrings *presentationStrings;
 @end
 
 @implementation TOPasscodeSettingsKeypadView
 
 
-- (instancetype)init:(PresentationStrings *) presentationStrings
+- (instancetype)init:(TOPasscodePresentationStrings *) presentationStrings
 {
     self = [super init];
     if (self) {

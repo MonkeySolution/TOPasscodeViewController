@@ -38,7 +38,7 @@
 
 /* The type of passcode we're displaying */
 @property (nonatomic, assign, readwrite) TOPasscodeType passcodeType;
-@property (nonatomic, readwrite) PresentationStrings *presentationStrings;
+@property (nonatomic, readwrite) TOPasscodePresentationStrings *presentationStrings;
 
 @end
 
@@ -53,7 +53,7 @@
     return self;
 }
 
-- (instancetype)initWithStyle:(TOPasscodeViewStyle)style passcodeType:(TOPasscodeType)type presentationString:(PresentationStrings *)presentationStrings
+- (instancetype)initWithStyle:(TOPasscodeViewStyle)style passcodeType:(TOPasscodeType)type presentationString:(TOPasscodePresentationStrings *)presentationStrings
 {
     if (self = [super initWithFrame:CGRectMake(0,0,320,393)]) {
         _presentationStrings = presentationStrings;

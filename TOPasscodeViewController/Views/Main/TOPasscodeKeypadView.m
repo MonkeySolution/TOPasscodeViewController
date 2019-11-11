@@ -38,12 +38,12 @@
 /* Images */
 @property (nonatomic, strong) UIImage *buttonImage;
 @property (nonatomic, strong) UIImage *tappedButtonImage;
-@property (nonatomic, readwrite) PresentationStrings *presentationStrings;
+@property (nonatomic, readwrite) TOPasscodePresentationStrings *presentationStrings;
 @end
 
 @implementation TOPasscodeKeypadView
 
-- (instancetype)init:(PresentationStrings *)presentationStrings
+- (instancetype)init:(TOPasscodePresentationStrings *)presentationStrings
 {
     self = [super init];
     if (self) {
