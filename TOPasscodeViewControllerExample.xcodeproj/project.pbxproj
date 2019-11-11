@@ -71,6 +71,7 @@
 		22D601C423656D0200275AD9 /* TOPasscodeFixedInputView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2292C9A71F2491E500E3C2C8 /* TOPasscodeFixedInputView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		22D601C523656D0400275AD9 /* TOPasscodeVariableInputView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2292C9AB1F2491E500E3C2C8 /* TOPasscodeVariableInputView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		22EAD9DA1EFA4CEF00D0C408 /* TOSettingsKeypadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EAD9D91EFA4CEF00D0C408 /* TOSettingsKeypadImage.m */; };
+		C3624CC723795DB100D17B56 /* PresentationStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = C3624C9523762BBD00D17B56 /* PresentationStrings.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -339,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22D601B423656CBF00275AD9 /* TOPasscodeViewController.h in Headers */,
+				C3624CC723795DB100D17B56 /* PresentationStrings.h in Headers */,
 				22D601B523656CC100275AD9 /* TOPasscodeSettingsViewController.h in Headers */,
 				22D601BB23656CF100275AD9 /* TOPasscodeView.h in Headers */,
 				22D601B723656CE900275AD9 /* TOPasscodeCircleImage.h in Headers */,
