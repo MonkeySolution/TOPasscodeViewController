@@ -71,7 +71,7 @@
 		22D601C423656D0200275AD9 /* TOPasscodeFixedInputView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2292C9A71F2491E500E3C2C8 /* TOPasscodeFixedInputView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		22D601C523656D0400275AD9 /* TOPasscodeVariableInputView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2292C9AB1F2491E500E3C2C8 /* TOPasscodeVariableInputView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		22EAD9DA1EFA4CEF00D0C408 /* TOSettingsKeypadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EAD9D91EFA4CEF00D0C408 /* TOSettingsKeypadImage.m */; };
-		C3624CC723795DB100D17B56 /* PresentationStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = C3624C9523762BBD00D17B56 /* PresentationStrings.h */; };
+		C3624CC723795DB100D17B56 /* PresentationStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = C3624C9523762BBD00D17B56 /* PresentationStrings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
