@@ -71,7 +71,7 @@
 		22D601C423656D0200275AD9 /* TOPasscodeFixedInputView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2292C9A71F2491E500E3C2C8 /* TOPasscodeFixedInputView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		22D601C523656D0400275AD9 /* TOPasscodeVariableInputView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2292C9AB1F2491E500E3C2C8 /* TOPasscodeVariableInputView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		22EAD9DA1EFA4CEF00D0C408 /* TOSettingsKeypadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EAD9D91EFA4CEF00D0C408 /* TOSettingsKeypadImage.m */; };
-		C3624CC723795DB100D17B56 /* TOPasscodePresentationStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = C3624C9523762BBD00D17B56 /* TOPasscodePresentationStrings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3624CC8237965F500D17B56 /* TOPasscodePresentationStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = C3624C9523762BBD00D17B56 /* TOPasscodePresentationStrings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,6 +231,7 @@
 				22D361101EDCC1CC002E5D35 /* TOPasscodeViewController.m */,
 				22D5C8181EE9F99600745F9A /* TOPasscodeSettingsViewController.h */,
 				22D5C8191EE9F99600745F9A /* TOPasscodeSettingsViewController.m */,
+				C3624C9523762BBD00D17B56 /* TOPasscodePresentationStrings.h */,
 				22D361081EDCC1CC002E5D35 /* Models */,
 				22D361111EDCC1CC002E5D35 /* Views */,
 				22D3610D1EDCC1CC002E5D35 /* Supporting */,
@@ -249,7 +250,6 @@
 				2292C9B61F2491F000E3C2C8 /* TOPasscodeViewContentLayout.m */,
 				22D3610B1EDCC1CC002E5D35 /* TOPasscodeViewControllerAnimatedTransitioning.h */,
 				22D3610C1EDCC1CC002E5D35 /* TOPasscodeViewControllerAnimatedTransitioning.m */,
-				C3624C9523762BBD00D17B56 /* TOPasscodePresentationStrings.h */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -340,7 +340,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				22D601B423656CBF00275AD9 /* TOPasscodeViewController.h in Headers */,
-				C3624CC723795DB100D17B56 /* TOPasscodePresentationStrings.h in Headers */,
 				22D601B523656CC100275AD9 /* TOPasscodeSettingsViewController.h in Headers */,
 				22D601BB23656CF100275AD9 /* TOPasscodeView.h in Headers */,
 				22D601B723656CE900275AD9 /* TOPasscodeCircleImage.h in Headers */,
@@ -355,6 +354,7 @@
 				22D601C023656CFD00275AD9 /* TOPasscodeSettingsWarningLabel.h in Headers */,
 				22D601BE23656CF800275AD9 /* TOPasscodeSettingsKeypadButton.h in Headers */,
 				22D601C123656CFE00275AD9 /* TOPasscodeButtonLabel.h in Headers */,
+				C3624CC8237965F500D17B56 /* TOPasscodePresentationStrings.h in Headers */,
 				22D601BC23656CF300275AD9 /* TOPasscodeCircleButton.h in Headers */,
 				22D601B923656CEC00275AD9 /* TOPasscodeViewContentLayout.h in Headers */,
 				22D601B623656CC800275AD9 /* TOPasscodeViewControllerConstants.h in Headers */,
